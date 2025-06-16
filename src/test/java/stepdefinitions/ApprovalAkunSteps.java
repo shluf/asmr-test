@@ -39,7 +39,7 @@ public class ApprovalAkunSteps {
     }
     @Given("User clicks on the Approve button  with name {string}")
     public void user_clicks_on_the_approve_button_with_name(String name) {
-        approvalRolePage.clickApproveButton();
+        approvalRolePage.clickApproveButton(name);
     }
     @Then("User should see a success message")
     public void user_should_see_a_success_message() {
