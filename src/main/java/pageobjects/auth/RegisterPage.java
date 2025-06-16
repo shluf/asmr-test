@@ -146,22 +146,24 @@ public class RegisterPage extends BasePage {
     }
 
     public void fillRegistrationForm(Map<String, String> data) {
-        enterNama(data.get("Nama"));
-        enterNik(data.get("NIK"));
-        enterNoKK(data.get("No. KK"));
-        enterTempatLahir(data.get("Tempat Lahir"));
-        enterTanggalLahir(data.get("Tanggal Lahir").replaceAll("-", ""));
-        selectJenisKelamin(data.get("Jenis Kelamin"));
-        selectAgama(data.get("Agama"));
-        selectProvinsi(data.get("Provinsi"));
-        selectKabupaten(data.get("Kabupaten"));
-        selectRw(data.get("RW"));
-        selectRt(data.get("RT"));
-        enterAlamat(data.get("Alamat"));
-        enterNoTelepon(data.get("No. Telepon"));
-        enterEmail(data.get("Email"));
-        enterPassword(data.get("Password"));
-        enterConfirmPassword(data.get("Password"));
+        if (data.containsKey("Name")) enterNama(data.get("Name"));
+        if (data.containsKey("NIK")) enterNik(data.get("NIK"));
+        if (data.containsKey("No. KK")) enterNoKK(data.get("No. KK"));
+        if (data.containsKey("Place of Birth")) enterTempatLahir(data.get("Place of Birth"));
+        if (data.containsKey("Date of Birth")) enterTanggalLahir(data.get("Date of Birth").replaceAll("-", ""));
+        if (data.containsKey("Gender")) selectJenisKelamin(data.get("Gender"));
+        if (data.containsKey("Religion")) selectAgama(data.get("Religion"));
+        if (data.containsKey("Province")) selectProvinsi(data.get("Province"));
+        if (data.containsKey("Regency")) selectKabupaten(data.get("Regency"));
+        if (data.containsKey("RW")) selectRw(data.get("RW"));
+        if (data.containsKey("RT")) selectRt(data.get("RT"));
+        if (data.containsKey("Address")) enterAlamat(data.get("Address"));
+        if (data.containsKey("Phone Number")) enterNoTelepon(data.get("Phone Number"));
+        if (data.containsKey("Email")) enterEmail(data.get("Email"));
+        if (data.containsKey("Password")) {
+            enterPassword(data.get("Password"));
+            enterConfirmPassword(data.get("Password"));
+        }
     }
 
     public void verifyAndCloseSuccessDialog() {

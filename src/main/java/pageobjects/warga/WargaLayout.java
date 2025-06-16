@@ -15,7 +15,7 @@ public class WargaLayout extends BasePage {
     private final By logoImage = By.xpath("/html/body/div/div[1]/div/div[1]/a");
     private final By dashboardLink = By.cssSelector("a[href='/warga']");
     private final By pengajuanLink = By.cssSelector("a[href='/warga/pengajuan']");
-    private final By historiPengajuanLink = By.cssSelector("a[href='/warga/histori-pengajuan']");
+    private final By historiPengajuanLink = By.cssSelector("a[href='/warga/histori']");
     private final By akunLink = By.cssSelector("a[href='/warga/akun']");
     private final By bantuanLink = By.cssSelector("a[href='/warga/bantuan']");
 

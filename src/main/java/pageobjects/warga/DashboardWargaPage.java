@@ -7,7 +7,7 @@ public class DashboardWargaPage extends WargaLayout {
 
     private final By headerTitle = By.xpath("//h1[contains(text(), 'Dashboard')]");
 
-    DashboardWargaPage (WebDriver driver) {
+    public DashboardWargaPage (WebDriver driver) {
         super(driver);
     }
 

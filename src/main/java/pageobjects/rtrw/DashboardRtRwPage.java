@@ -7,7 +7,7 @@ public class DashboardRtRwPage extends RtRwLayout {
 
     private final By headerTitle = By.xpath("//h1[contains(text(), 'Dashboard')]");
 
-    DashboardRtRwPage (WebDriver driver) {
+    public DashboardRtRwPage(WebDriver driver) {
         super(driver);
     }
 
