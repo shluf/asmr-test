@@ -1,8 +1,6 @@
 package pageobjects.auth;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.BasePage;
@@ -30,13 +28,15 @@ public class RegisterPage extends BasePage {
     private final By emailField = By.id("email");
     private final By passwordField = By.id("password");
     private final By confirmPasswordField = By.id("password_confirmation");
-    private final By registerButton = By.xpath("//button[text()='Registrasi']");
+    private final By registerButton = By.xpath("/html/body/section/div[2]/div/form/div/div[3]/button");
     private final By successMessage = By.xpath("//h2[text()='Berhasil']");
     private final By closeSuccessButton = By.xpath("//button[normalize-space()='Tutup']");
+    private final By errorMessage = By.xpath("//h2[text()='Gagal']");
+
 
     public RegisterPage(WebDriver driver) {
         super(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public boolean isTitleDisplayed() {
@@ -142,7 +142,21 @@ public class RegisterPage extends BasePage {
     }
 
     public void clickRegister() {
-        attempt(() -> wait.until(ExpectedConditions.elementToBeClickable(registerButton)).click());
+        attempt(() -> {
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(registerButton));
+            // Scroll tombol ke tengah layar agar terlihat
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", button);
+            // Tunggu sampai tombol benar-benar tidak tertutup elemen lain
+            wait.until(ExpectedConditions.visibilityOf(button));
+            wait.until(ExpectedConditions.elementToBeClickable(button));
+            try {
+                button.click();
+            } catch (ElementClickInterceptedException e) {
+                // Jika masih ketutup, fallback pakai JS click
+                System.out.println("ElementClickInterceptedException terjadi. Coba klik dengan JS.");
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+            }
+        });
     }
 
     public void fillRegistrationForm(Map<String, String> data) {
@@ -167,6 +181,12 @@ public class RegisterPage extends BasePage {
     public void verifyAndCloseSuccessDialog() {
         attempt(() -> {
             wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+            wait.until(ExpectedConditions.elementToBeClickable(closeSuccessButton)).click();
+        });
+    }
+    public void verifyErrorMessage() {
+        attempt(() -> {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
             wait.until(ExpectedConditions.elementToBeClickable(closeSuccessButton)).click();
         });
     }

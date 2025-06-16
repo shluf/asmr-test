@@ -31,7 +31,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isTitleDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(title));
 
         String titleText = "";

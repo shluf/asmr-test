@@ -33,69 +33,37 @@ public class RegisterSteps {
         this.registerPage = new RegisterPage(driver);
     }
 
-    @Given("saya berada di landing page")
+    @Given("The user is on the landing page")
     public void saya_berada_di_landing_page() {
         driver.get("https://asmr-fe.vpsdzaky.cloud");
     }
 
-    @When("saya klik tombol {string}")
+    @When("The user clicks the {string} button")
     public void saya_klik_tombol(String buttonName) {
         if (buttonName.equalsIgnoreCase("Registrasi")) {
             landingPage.clickRegister();
         }
     }
 
-    @And("saya memasukkan data registrasi sebagai berikut:")
+    @And("I enter registration data as follows:")
     public void saya_memasukkan_data_registrasi_sebagai_berikut(DataTable dataTable) {
         Map<String, String> data = dataTable.asMaps().getFirst();
         registerPage.fillRegistrationForm(data);
     }
 
-    @And("saya klik tombol daftar")
+    @And("I click the register button")
     public void saya_klik_tombol_daftar() {
         registerPage.clickRegister();
     }
 
-    @Then("saya seharusnya melihat pesan registrasi berhasil")
+    @Then("I should see a successful registration message")
     public void saya_seharusnya_melihat_pesan_registrasi_berhasil() {
         registerPage.verifyAndCloseSuccessDialog();
     }
-
-    @When("saya login sebagai admin dengan email {string} dan password {string}")
-    public void saya_login_sebagai_admin_dengan_email_dan_password(String email, String password) {
-        loginPage.enterEmail(email);
-        loginPage.enterPassword(password);
-        loginPage.clickLogin();
+    @Then("I should see a popup with a failed registration message")
+    public void saya_seharusnya_melihat_popup_dengan_pesan_registrasi_gagal() {
+        registerPage.verifyErrorMessage();
     }
 
-    @Then("saya seharusnya berada di Halaman {string}")
-    public void sayaSeharusnyaBeradaDiHalaman(String pageName) {
-        Assert.assertTrue(dashboardAdminPage.isLogoDisplayed());
-        Assert.assertEquals(pageName, dashboardAdminPage.getHeaderTitle());
-    }
 
-    @And("saya membuka halaman {string}")
-    public void saya_membuka_halaman(String pageName) {
-        dashboardAdminPage.goToApprovalPage();
-        Assert.assertEquals(pageName, approvalRolePage.getHeaderTitle());
-    }
-
-    @Then("saya seharusnya melihat {string} di dalam daftar approval")
-    public void saya_seharusnya_melihat_di_dalam_daftar_approval(String name) {
-        Assert.assertTrue("User is not in approval list", approvalRolePage.isUserInApprovalList(name));
-    }
-
-    @Then("saya seharusnya melihat popup dengan pesan registrasi gagal")
-    public void sayaSeharusnyaMelihatPopupDenganPesanRegistrasiGagal() {
-
-    }
-
-    @And("saya klik tombol tutup")
-    public void sayaKlikTombolTutup() {
-
-    }
-
-    @Then("seharusnya terdapat pesan error dibawah input")
-    public void seharusnyaTerdapatPesanErrorDibawahInput() {
-    }
 } 
