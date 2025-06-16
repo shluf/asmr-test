@@ -38,11 +38,9 @@ public class RegisterSteps {
         driver.get("https://asmr-fe.vpsdzaky.cloud");
     }
 
-    @When("The user clicks the {string} button")
-    public void saya_klik_tombol(String buttonName) {
-        if (buttonName.equalsIgnoreCase("Registrasi")) {
-            landingPage.clickRegister();
-        }
+    @When("The user clicks the button")
+    public void saya_klik_tombol() {
+        landingPage.clickRegister();
     }
 
     @And("I enter registration data as follows:")
@@ -64,6 +62,5 @@ public class RegisterSteps {
     public void saya_seharusnya_melihat_popup_dengan_pesan_registrasi_gagal() {
         registerPage.verifyErrorMessage();
     }
-
 
 } 

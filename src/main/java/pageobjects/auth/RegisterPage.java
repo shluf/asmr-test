@@ -36,7 +36,7 @@ public class RegisterPage extends BasePage {
 
     public RegisterPage(WebDriver driver) {
         super(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public boolean isTitleDisplayed() {
