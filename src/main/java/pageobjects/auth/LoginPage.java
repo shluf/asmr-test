@@ -33,7 +33,12 @@ public class LoginPage extends BasePage {
     public boolean isTitleDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(title));
-        return titleElement.isDisplayed();
+
+        String titleText = "";
+        if (titleElement.isDisplayed()) {
+            titleText = titleElement.getText();
+        }
+        return titleText.equals("Login");
     }
 
     public String getActualUrl() {
@@ -58,10 +63,10 @@ public class LoginPage extends BasePage {
 
     public void loginAs(Role role) {
         String emailToUse = switch (role) {
-            case ADMIN -> emails.get(0);
-            case RT -> emails.get(1);
-            case RW -> emails.get(2);
-            case WARGA -> emails.get(3);
+            case Role.ADMIN -> emails.get(0);
+            case Role.RT -> emails.get(1);
+            case Role.RW -> emails.get(2);
+            case Role.WARGA -> emails.get(3);
         };
 
         enterEmail(emailToUse);

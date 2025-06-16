@@ -31,7 +31,9 @@ public class LoginSteps {
 
     @When("User click login button")
     public void user_click_login_button() {
-        landingPage.clickLogin();
+        if (landingPage.isHeroImageDisplayed()){
+            landingPage.clickLogin();
+        }
     }
 
     @Then("User should be redirected to the login page")
@@ -54,7 +56,6 @@ public class LoginSteps {
 
     @Then("User should be redirected to the dashboard")
     public void user_should_be_redirected_to_the_dashboard() {
-//        System.out.println("Current URL after login: " + UseDriver.getDriver().getCurrentUrl());
         Assert.assertTrue("Logo image is not displayed.", dashboardAdminPage.isLogoDisplayed());
 
         String expectedUrl = "https://asmr-fe.vpsdzaky.cloud/admin";
