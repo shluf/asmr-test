@@ -53,7 +53,6 @@ public class LoginSteps {
     public void user_submit_valid_credentials() {
         loginPage.loginAs(Role.ADMIN);
     }
-
     @Then("User should be redirected to the dashboard")
     public void user_should_be_redirected_to_the_dashboard() {
         Assert.assertTrue("Logo image is not displayed.", dashboardAdminPage.isLogoDisplayed());
