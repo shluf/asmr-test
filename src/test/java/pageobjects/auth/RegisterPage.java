@@ -14,7 +14,7 @@ public class RegisterPage extends BasePage {
     private final By Name  = By.xpath("//*[@id=\"nama\"]");
     private final By NIK = By.xpath("//input[@id='nik']");
     private final By NomerKK = By.xpath("//*[@id=\"nomer_kk\"]");
-    private final By TempatLahir = By.id("tempat_lahir");
+    private final By TempatLahir = By.xpath("//input[@id='tempat_lahir']");
     private final By TanggalLahir = By.xpath("//*[@id=\"tanggal_lahir\"]");
     private final By JenisKelamin = By.xpath("/html/body/section/div[2]/div/form/div/div[1]/div[5]/select/option[1]");
     private final By Agama = By.xpath("/html/body/section/div[2]/div/form/div/div[1]/div[6]/select/option[1]");
@@ -45,19 +45,13 @@ public class RegisterPage extends BasePage {
         driver.findElement(Name).sendKeys(name);
     }
     public void enterNIK(String nik) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement nikInput = wait.until(ExpectedConditions.elementToBeClickable(NIK));
-        nikInput.clear();
-        nikInput.sendKeys(nik);
+        driver.findElement(NIK).sendKeys(nik);
     }
     public void enterNomerKK(String nomerKK) {
         driver.findElement(NomerKK).sendKeys(nomerKK);
     }
     public void enterTempatLahir(String tempatLahir) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement tempatLahirInput = wait.until(ExpectedConditions.elementToBeClickable(TempatLahir));
-        tempatLahirInput.clear();
-        tempatLahirInput.sendKeys(tempatLahir);
+        driver.findElement(TempatLahir).sendKeys(tempatLahir);
     }
     public void enterTanggalLahir(String tanggalLahir) {
         driver.findElement(TanggalLahir).sendKeys(tanggalLahir);
