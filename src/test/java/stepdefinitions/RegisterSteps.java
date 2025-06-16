@@ -84,4 +84,18 @@ public class RegisterSteps {
     public void saya_seharusnya_melihat_di_dalam_daftar_approval(String name) {
         Assert.assertTrue("User is not in approval list", approvalRolePage.isUserInApprovalList(name));
     }
-}
+
+    @Then("saya seharusnya melihat popup dengan pesan registrasi gagal")
+    public void sayaSeharusnyaMelihatPopupDenganPesanRegistrasiGagal() {
+
+    }
+
+    @And("saya klik tombol tutup")
+    public void sayaKlikTombolTutup() {
+
+    }
+
+    @Then("seharusnya terdapat pesan error dibawah input")
+    public void seharusnyaTerdapatPesanErrorDibawahInput() {
+    }
+} 
