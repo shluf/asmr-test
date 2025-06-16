@@ -8,5 +8,5 @@ import org.junit.runner.RunWith;
         glue = {"stepdefinitions", "hooks"},
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
-public class TestRunner {
+public class  TestRunner {
 }
