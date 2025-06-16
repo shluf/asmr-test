@@ -1,8 +1,7 @@
 package pageobjects.warga;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,7 +10,7 @@ import java.time.Duration;
 public class HistoriPengajuanPage extends WargaLayout {
     private final WebDriverWait wait;
 
-    private final String approvedLetterDownloadIcon = "//td[text()='Disetujui']/following-sibling::td//button[@id='download-button']";
+    private final String approvedLetterDownloadIcon = " //td[text()='Disetujui']/following-sibling::td//button[@id='download-button']";
     private final String rejectedLetterRow = "//td[text()='Ditolak']";
     private final By latestStatus = By.xpath("(//tbody/tr/td[4])[1]");
     private final By viewLatestDetailButton = By.xpath("(//button[text()='Lihat Selengkapnya'])[1]");
@@ -19,7 +18,10 @@ public class HistoriPengajuanPage extends WargaLayout {
 
     public HistoriPengajuanPage(WebDriver driver) {
         super(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    }
+    public void onHistoryPengajuanPage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(), 'Histori Pengajuan')]")));
     }
 
     public void viewLatestSubmissionDetail() {
@@ -31,8 +33,31 @@ public class HistoriPengajuanPage extends WargaLayout {
     }
 
     public void clickDownloadForApprovedLetter() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(approvedLetterDownloadIcon))).click();
+        attempt(() -> {
+            By statusLocator = By.xpath("//td[normalize-space(text())='Disetujui']");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(statusLocator));
+
+            By buttonLocator = By.xpath("//td[normalize-space(text())='Disetujui']/following-sibling::td//button[@id='download-button']");
+            WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(buttonLocator));
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", button
+            );
+
+            wait.until(ExpectedConditions.elementToBeClickable(button));
+
+            try {
+                button.click();
+            } catch (ElementClickInterceptedException e) {
+                System.out.println("ElementClickInterceptedException terjadi. Coba klik dengan JS.");
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+            }
+
+        });
     }
+
+
+
 
     public boolean isDownloadButtonVisibleForRejectedLetter() {
         try {

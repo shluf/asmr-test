@@ -2,6 +2,7 @@
 Feature: Citizen Letter Download
   As a citizen, I want to be able to download an approved letter.
 
+  @run_this_one
   @positive
   Scenario: [TCW-411] Citizen successfully downloads an approved letter
     Given I am logged in as "warga.andi@example.com" with password "password"
