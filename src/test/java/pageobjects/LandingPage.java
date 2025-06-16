@@ -11,7 +11,7 @@ import java.time.Duration;
 public class LandingPage extends BasePage {
 
     private final By loginButton = By.xpath("/html/body/main/nav/div/div[3]/a[2]");
-    private final By registerButton = By.xpath("/html/body/main/nav/div/div[3]/a[2]");
+    private final By registerButton = By.xpath("//html/body/main/nav/div/div[3]/a[1]");
     private final By heroImage = By.xpath("/html/body/main/div/section[1]/div[1]/img");
 
     public LandingPage(WebDriver driver) {
