@@ -30,6 +30,7 @@ Scenario: Warga registers successfully
 
 @negative
 Scenario: Warga registers with invalid NIK
+  Given User is on the landing page As Warga
   Given User clicks register button
   Given User is on the registration page
   When user enters name "Budi"

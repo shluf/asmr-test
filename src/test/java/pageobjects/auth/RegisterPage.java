@@ -12,7 +12,7 @@ import java.time.Duration;
 public class RegisterPage extends BasePage {
     private final By title = By.xpath("/html/body/section/div[2]/div/h1");
     private final By Name  = By.xpath("//*[@id=\"nama\"]");
-    private final By NIK = By.xpath("//*[@id=\"nik\"]");
+    private final By NIK = By.xpath("//input[@id='nik']");
     private final By NomerKK = By.xpath("//*[@id=\"nomer_kk\"]");
     private final By TempatLahir = By.id("tempat_lahir");
     private final By TanggalLahir = By.xpath("//*[@id=\"tanggal_lahir\"]");
