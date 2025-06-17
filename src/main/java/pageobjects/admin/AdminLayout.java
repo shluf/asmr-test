@@ -35,6 +35,8 @@ public class AdminLayout extends BasePage {
     public void goToApprovalPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(approvalRoleLink)).click();
+
+        driver.get("https://asmr-fe.vpsdzaky.cloud/admin/approval-role");
     }
 
     public void goToDashboard() {
