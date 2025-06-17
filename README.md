@@ -1,6 +1,6 @@
 # Proyek Pengujian Otomatis ASMR
 
-Proyek ini berisi serangkaian pengujian otomatis untuk aplikasi ASMR dengan alamat website sebagai berikut ini asmr-fe.vpsdzaky.cloud, yang dibuat menggunakan Selenium dan Cucumber. Proyek ini mengikuti pola desain Page Object Model (POM) untuk pemeliharaan dan skalabilitas yang lebih baik.
+Proyek ini berisi serangkaian pengujian otomatis untuk aplikasi ASMR dengan alamat website sebagai berikut ini http://asmr-fe.vpsdzaky.cloud/ , yang dibuat menggunakan Selenium dan Cucumber. Proyek ini mengikuti pola desain Page Object Model (POM) untuk pemeliharaan dan skalabilitas yang lebih baik.
 
 ## Ikhtisar Proyek
 
