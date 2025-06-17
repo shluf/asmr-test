@@ -27,12 +27,7 @@ public class DownloadSuratSteps {
         this.dashboardWargaPage = new DashboardWargaPage(driver);
         this.historiPengajuanPage = new HistoriPengajuanPage(driver);
     }
-//    @Given("I am logged in as {string} with password {string}")
-//    public void i_am_logged_in_as_with_password(String email, String password) {
-//        loginPage.enterEmail(email);
-//        loginPage.enterPassword(password);
-//        loginPage.clickLogin();
-//    }
+
     @And("the letter has been approved by RT and RW")
     public void the_letter_has_been_approved_by_rt_and_rw() {
         // In a real test, this step would involve setting up test data.
@@ -47,10 +42,7 @@ public class DownloadSuratSteps {
         // with a "Ditolak" status exists for the user.
         System.out.println("Test pre-condition: A letter rejected by RT or RW exists.");
     }
-//    @When("I am on the {string} sub menu")
-//    public void i_am_on_the_sub_menu(String subMenu) {
-//        historiPengajuanPage.onHistoryPengajuanPage();
-//    }
+
 
     @When("I click the download icon for the approved letter")
     public void i_click_the_download_icon_for_the_approved_letter() {

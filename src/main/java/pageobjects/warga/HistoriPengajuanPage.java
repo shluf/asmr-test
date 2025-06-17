@@ -34,10 +34,10 @@ public class HistoriPengajuanPage extends WargaLayout {
 
     public void clickDownloadForApprovedLetter() {
         attempt(() -> {
-            By statusLocator = By.xpath("//td[normalize-space(text())='Disetujui']");
+            By statusLocator = By.xpath("//*[normalize-space(text())='Disetujui']");
             wait.until(ExpectedConditions.visibilityOfElementLocated(statusLocator));
 
-            By buttonLocator = By.xpath("//td[normalize-space(text())='Disetujui']/following-sibling::td//button[@id='download-button']");
+            By buttonLocator = By.xpath("//button[@id='download-button']");
             WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(buttonLocator));
 
             ((JavascriptExecutor) driver).executeScript(
