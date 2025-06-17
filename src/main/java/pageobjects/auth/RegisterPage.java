@@ -1,6 +1,7 @@
 package pageobjects.auth;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.BasePage;
@@ -11,6 +12,8 @@ import java.util.Map;
 public class RegisterPage extends BasePage {
 
     private final WebDriverWait wait;
+    private final Actions actions;
+
     private final By title = By.xpath("//h1[text()='Register']");
     private final By namaField = By.id("nama");
     private final By nikField = By.id("nik");
@@ -29,14 +32,19 @@ public class RegisterPage extends BasePage {
     private final By passwordField = By.id("password");
     private final By confirmPasswordField = By.id("password_confirmation");
     private final By registerButton = By.xpath("/html/body/section/div[2]/div/form/div/div[3]/button");
-    private final By successMessage = By.xpath("//h2[text()='Berhasil']");
-    private final By closeSuccessButton = By.xpath("//button[normalize-space()='Tutup']");
-    private final By errorMessage = By.xpath("//h2[text()='Gagal']");
+
+    private final By nikErrorMessage = By.xpath("//*[contains(text(), 'NIK minimal 16 digit')]");
+
+    private final By dialogContent = By.id("alert-title");
+    private final By confirmDialogButton = By.id("alert-confirm-button");
+    private final By closeDialogButton = By.id("alert-close-button");
+
 
 
     public RegisterPage(WebDriver driver) {
         super(driver);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.actions = new Actions(driver);
     }
 
     public boolean isTitleDisplayed() {
@@ -159,6 +167,10 @@ public class RegisterPage extends BasePage {
         });
     }
 
+    public boolean verifyNikErrorMessage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(nikErrorMessage)).isDisplayed();
+    }
+
     public void fillRegistrationForm(Map<String, String> data) {
         if (data.containsKey("Name")) enterNama(data.get("Name"));
         if (data.containsKey("NIK")) enterNik(data.get("NIK"));
@@ -180,16 +192,18 @@ public class RegisterPage extends BasePage {
         }
     }
 
-    public void verifyAndCloseSuccessDialog() {
-        attempt(() -> {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
-            wait.until(ExpectedConditions.elementToBeClickable(closeSuccessButton)).click();
-        });
+    public String verifyDialog() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dialogContent));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(dialogContent)).getText();
     }
-    public void verifyErrorMessage() {
-        attempt(() -> {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
-            wait.until(ExpectedConditions.elementToBeClickable(closeSuccessButton)).click();
-        });
+
+    public void clickCloseDialogButton() {
+        actions.moveToElement(wait.until(ExpectedConditions.elementToBeClickable(closeDialogButton))).perform();
+        wait.until(ExpectedConditions.elementToBeClickable(closeDialogButton)).click();
+    }
+
+    public void clickConfirmDialogButton() {
+        actions.moveToElement(wait.until(ExpectedConditions.elementToBeClickable(confirmDialogButton))).perform();
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDialogButton)).click();
     }
 }

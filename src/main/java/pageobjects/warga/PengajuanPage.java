@@ -25,7 +25,7 @@ public class PengajuanPage extends BasePage {
     private final By agamaField = By.id("agama_pemohon");
     private final String jenisSuratLabel = "//span[normalize-space()='%s']/parent::label";
     private final By lainnyaRadioLabel = By.xpath("//span[normalize-space()='Lainnya :']/parent::label");
-    private final By lainnyaTextarea = By.xpath("//textarea[@placeholder='Detail Pengajuan']");
+    private final By lainnyaTextarea = By.xpath("(//button[@id='expand-button'])[1]");
     private final By ajukanButton = By.xpath("//button[text()='Ajukan']");
     private final By successPopup = By.id("alert-content");
     private final By closePopupButton = By.id("alert-close-button");

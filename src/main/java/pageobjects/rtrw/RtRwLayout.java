@@ -17,10 +17,10 @@ public class RtRwLayout extends BasePage {
     private final String dashboardRtLink = "a[href='/%s']";
     private final String pengajuanMasalahLink = "a[href='/%s/pengajuan-masalah']";
     private final String rekapPengajuanLink = "a[href='/%s/rekap-pengajuan']";
-    private final String pengajuanWargaLink = "a[href='/%s/pengajuan-warga']";
+    private final String pengajuanWargaLink = "a[href='/%s/pengajuan-masalah']";
     private final String bantuanLink = "a[href='/%s/bantuan']";
-    private final By userIcon = By.cssSelector("#radix-\\:r3b\\:");
-    private final By logoutButton = By.xpath("//div[text()='Logout']");
+    private final By userIcon = By.id("profile-button");
+    private final By logoutButton = By.id("logout-button");
 
     RtRwLayout (WebDriver driver) {
         super(driver);
@@ -32,29 +32,28 @@ public class RtRwLayout extends BasePage {
     }
 
     public boolean isLogoDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(logoImage));
         return titleElement.isDisplayed();
     }
 
     public void goToDashboard(String role) {
-        driver.findElement(By.cssSelector(String.format(dashboardRtLink, role.toLowerCase()))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format(dashboardRtLink, role.toLowerCase())))).click();
     }
 
     public void goToPengajuanMasalah(String role) {
-        driver.findElement(By.cssSelector(String.format(pengajuanMasalahLink, role.toLowerCase()))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format(pengajuanMasalahLink, role.toLowerCase())))).click();
     }
 
     public void goToRekapPengajuan(String role) {
-        driver.findElement(By.cssSelector(String.format(rekapPengajuanLink, role.toLowerCase()))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format(rekapPengajuanLink, role.toLowerCase())))).click();
     }
 
     public void goToPengajuanWarga(String role) {
-        driver.findElement(By.cssSelector(String.format(pengajuanWargaLink, role.toLowerCase()))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format(pengajuanWargaLink, role.toLowerCase())))).click();
     }
 
     public void goToBantuan(String role) {
-        driver.findElement(By.cssSelector(String.format(bantuanLink, role.toLowerCase()))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format(bantuanLink, role.toLowerCase())))).click();
     }
 
     public void logout() {

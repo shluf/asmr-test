@@ -31,11 +31,6 @@ public class RegisterWargaSteps {
         registerPage.fillRegistrationForm(data);
     }
 
-    @Then("I should see a successful registration message")
-    public void i_should_see_a_successful_registration_message() {
-        registerPage.verifyAndCloseSuccessDialog();
-    }
-
     @Then("I should be on the {string} page")
     public void i_should_be_on_the_page(String pageName) {
         Assert.assertTrue(dashboardAdminPage.isLogoDisplayed());
@@ -47,18 +42,28 @@ public class RegisterWargaSteps {
         Assert.assertTrue("User is not in approval list", approvalRolePage.isUserInApprovalList(name));
     }
 
+    @Then("I should see a successful registration message")
+    public void i_should_see_a_successful_registration_message() {
+        Assert.assertEquals("Berhasil", registerPage.verifyDialog());
+    }
+
     @Then("I should see a registration failed popup message")
     public void i_should_see_a_registration_failed_popup_message() {
-        // Implementation for failed registration popup
+        Assert.assertEquals("Gagal", registerPage.verifyDialog());
     }
 
     @And("I click the close button")
     public void i_click_the_close_button() {
-        // Implementation for clicking close button on popup
+        registerPage.clickCloseDialogButton();
+    }
+
+    @And("I click the confirm button")
+    public void i_click_the_confirm_button() {
+        registerPage.clickConfirmDialogButton();
     }
 
     @Then("an error message should be displayed below the input")
     public void an_error_message_should_be_displayed_below_the_input() {
-        // Implementation for verifying error message
+        Assert.assertTrue(registerPage.verifyNikErrorMessage());
     }
 } 

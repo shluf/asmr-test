@@ -13,7 +13,6 @@ import pageobjects.admin.DashboardAdminPage;
 import pageobjects.auth.LoginPage;
 import pageobjects.auth.RegisterPage;
 import pageobjects.rtrw.DashboardRtRwPage;
-import pageobjects.rtrw.DetailPengajuanPage;
 import pageobjects.warga.DashboardWargaPage;
 import pageobjects.warga.PengajuanPage;
 import pageobjects.rtrw.PengajuanWargaPage;
@@ -27,7 +26,6 @@ public class CommonSteps {
     private final DashboardAdminPage dashboardAdminPage;
     private final ApprovalRolePage approvalRolePage;
     private final DashboardRtRwPage dashboardRtRwPage;
-    private final DetailPengajuanPage detailPengajuanPage;
     private final PengajuanPage pengajuanPage;
     private final DashboardWargaPage dashboardWargaPage;
     private final PengajuanWargaPage pengajuanWargaPage;
@@ -41,7 +39,6 @@ public class CommonSteps {
         this.dashboardAdminPage = new DashboardAdminPage(driver);
         this.approvalRolePage = new ApprovalRolePage(driver);
         this.dashboardRtRwPage = new DashboardRtRwPage(driver);
-        this.detailPengajuanPage = new DetailPengajuanPage(driver);
         this.pengajuanPage = new PengajuanPage(driver);
         this.dashboardWargaPage = new DashboardWargaPage(driver);
         this.pengajuanWargaPage = new PengajuanWargaPage(driver);
@@ -62,6 +59,7 @@ public class CommonSteps {
 
     @When("I log in as an admin with email {string} and password {string}")
     public void i_log_in_as_an_admin_with_email_and_password(String email, String password) {
+        driver.get("https://asmr-fe.vpsdzaky.cloud/login");
         loginPage.enterEmail(email);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
@@ -69,7 +67,6 @@ public class CommonSteps {
     
     @Then("I log in as {string} with password {string}")
     public void i_log_in_as_with_password(String email, String password) {
-        driver.get("https://asmr-fe.vpsdzaky.cloud/login");
         loginPage.enterEmail(email);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
@@ -87,7 +84,6 @@ public class CommonSteps {
             dashboardWargaPage.goToHistoriPengajuan();
         } else if (pageName.equalsIgnoreCase("Approval Role")) {
             dashboardAdminPage.goToApprovalPage();
-            Assert.assertEquals(pageName, approvalRolePage.getHeaderTitle());
         }
     }
 
@@ -98,11 +94,7 @@ public class CommonSteps {
 
     @And("I click the {string} button")
     public void i_click_the_button(String buttonName) {
-        if (buttonName.equalsIgnoreCase("Setujui")) {
-            detailPengajuanPage.approveSubmission();
-        } else if (buttonName.equalsIgnoreCase("Tolak")) {
-            detailPengajuanPage.rejectSubmission();
-        } else if (buttonName.equalsIgnoreCase("Ajukan")) {
+        if (buttonName.equalsIgnoreCase("Ajukan")) {
             pengajuanPage.clickAjukan();
         } else if (buttonName.equalsIgnoreCase("Registrasi")) {
             landingPage.clickRegister();

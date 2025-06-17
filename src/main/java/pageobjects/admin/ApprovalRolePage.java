@@ -9,7 +9,8 @@ import java.time.Duration;
 
 public class ApprovalRolePage extends AdminLayout {
     private final WebDriverWait wait;
-    private final By headerTitle = By.xpath("//h1[contains(text(), 'Approval Role')]");
+    
+    private final By headerTitle = By.id("header-title");
     private final By SuccessMassage = By.xpath("//*[@id=\"alert-title\"]");
     private final By CloseSuccessButton = By.xpath("//*[@id=\"alert-close-button\"]");
 
